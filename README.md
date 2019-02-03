@@ -11,7 +11,7 @@
 
 
 * BSides Tampa 2019
-  * [A Thousand Words](../BSidesTamp2019/AThousandWords)
+  * [A Thousand Words : Stego](../BSidesTampa2019/AThousandWords)
 
 [1]: https://ctftime.org/team/2524
 [2]: https://twitter.com/naphalsec

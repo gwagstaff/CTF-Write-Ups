@@ -13,7 +13,7 @@ We were first given a .zip archive called [A_Thousand_Words.zip][2] which contai
 unzip -P BSides2019 A_Thousand_Words.zip
 ```
 
-After getting the actual challenge file, I ran the usual suite of `file`, `strings | grep BSides`, and `xxd` on it to make sure that I was dealing with a text file.
+After getting the actual challenge file, I ran the usual suite of `file`, `strings | grep BSides` (CTF Flag format), and `xxd` on it to make sure that I was dealing with an text file.
 
 Now knowing I was dealing with actual ASCII text I went ahead and opened it with `more "A Thousand Words.txt"`
 
@@ -25,9 +25,9 @@ Our spies in Relatively_Evil_Country are trying to get us a message to end the c
 One of them managed to get us this cryptic message. It just looks like a bunch of IP addresses but that can't be right.
 Your mission, should you choose to accept it: Find the message hidden somewhere in the numbers below.
 ```
-After that we get a list of IPs that look normal but after scrolling down I noticed that the IPs last byte all end in one. So between that and the challenge description stated " A picture is worth "( from the common saying "a picture is worth a thousand words") I was able to decide the the first 3 bytes of the IPs correponded to RGB values of a pixel!
+After that we get a list of IPs that look normal but after scrolling down I noticed that the IPs last byte all end in 1. So between that and the challenge description stated " A picture is worth "( from the common saying "a picture is worth a thousand words") I was able to decide the the first 3 bytes of the IPs correponded to RGB values of a pixel!
 
-Luckily I saw another writeup of a similar problem only a couple of weeks ago from a tech/ctf youtuber [JohnHammond][1]
+Luckily I saw another writeup of a similar problem only a couple of weeks ago from a tech/ctf youtuber [@JohnHammond][1] and knew how to proceed
 
  Using that knowledge I was able to to strip out the story from the text file given with
  ```
