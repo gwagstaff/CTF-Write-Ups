@@ -16,4 +16,4 @@
 [1]: https://ctftime.org/team/2524
 [2]: https://twitter.com/naphalsec
 [3]: https://www.linkedin.com/in/graysonwagstaff/
-[4]: ../tree/master/BSidesTampa2019/A_Thousand_Words
+[4]: https://github.com/gwagstaff/CTF-Write-Ups/tree/master/BSidesTampa2019/A_Thousand_Words
