@@ -103,7 +103,8 @@ Progress: 765 / 87665 (0.87%)^C
   ```
 When we go to that site we get these files.
 
-![/development/directory](6)
+![development_directory][6]
+
 in dev.txt we get
 ```
 
@@ -231,15 +232,15 @@ Since there isnt a flag for this we can only think about the possible informatio
 ##### 11. What is the final password you obtain?
  That contains our final flags!
 
-![KayUserProof](10)
+![KayUserProof][10]
 
 [1]: https://tryhackme.com/room/basicpentesting
 [2]: https://tryhackme.com/access
 [3]: https://nmap.org/
 [4]: https://ippsec.rocks/#
 [5]: https://github.com/OJ/gobuster
-[6]: .\resources\webapp_80_files.png
+[6]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/Basic_Webapp/resources/webapp_80_files.png
 [7]: https://github.com/danielmiessler/SecLists
 [8]: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite
 [9]: https://github.com/magnumripper/JohnTheRipper
-[10]: .\resources\webapp_ssh_kay.png
+[10]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/Basic_Webapp/resources/webapp_ssh_kay.png
