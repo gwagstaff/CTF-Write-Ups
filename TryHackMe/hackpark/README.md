@@ -33,7 +33,7 @@ Nmap done: 1 IP address (1 host up) scanned in 95.03 seconds
 
   While that is running we also can check out the webserver here:
 
-  ![hackparkwebpage](2)
+  ![hackparkwebpage][2]
 
   We can see that creepy clown is the one and only PennyWise.
 
@@ -44,7 +44,7 @@ Nmap done: 1 IP address (1 host up) scanned in 95.03 seconds
 ### 2. Using Hydra to brute-force a login
   We can see by checking out the login page in the network tab on Firefox that it sends a
   POST request with an .aspx form.  
-  ![ASPXPostRequest](3)
+  ![ASPXPostRequest][3]
 
 
   From there we are suppose to crack using Hydra on the login page.
@@ -72,7 +72,7 @@ as a success.
   Logging in on the log-on page we gain access the Administrator account
 
   Going down to `http://10.10.128.86/admin/about.cshtml`  we see all this information
-  ![blogengineinfo](4)
+  ![blogengineinfo][4]
 
   We can identify the version of the BlogEngine as  3.3.6.0.
 
@@ -84,7 +84,7 @@ as a success.
    We also need to rename the edited file to `PostView.ascx` per the instructions.
 
   Then upload the edited file using the link in the image
-  ![filemanagerbutton](6)
+  ![filemanagerbutton][6]
 
   After uploading we can then browse to `http://[machineIP]/?theme=../../App_Data/files`
   to execute the reverse shell, go back to the terminal with nc session and there should be a command prompt for you.
