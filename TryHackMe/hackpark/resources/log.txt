@@ -1,0 +1,47 @@
+PID   PPID  Name                  Arch  Session  User              Path
+---   ----  ----                  ----  -------  ----              ----
+0     0     [System Process]
+4     0     System
+376   4     smss.exe
+468   676   svchost.exe
+524   516   csrss.exe
+580   572   csrss.exe
+592   516   wininit.exe
+620   572   winlogon.exe
+676   592   services.exe
+684   592   lsass.exe
+748   676   svchost.exe
+764   676   svchost.exe
+792   676   svchost.exe
+884   620   dwm.exe
+892   676   svchost.exe
+928   676   svchost.exe
+988   676   svchost.exe
+1160  676   spoolsv.exe
+1200  676   amazon-ssm-agent.exe
+1276  676   svchost.exe
+1304  676   LiteAgent.exe
+1352  676   svchost.exe
+1368  676   svchost.exe
+1408  676   WService.exe
+1572  676   wlms.exe
+1580  1408  WScheduler.exe
+1596  676   Ec2Config.exe
+1652  2292  WScheduler.exe
+1832  676   svchost.exe
+1932  676   sppsvc.exe
+2016  676   vds.exe
+2172  1652  Message.exe
+2276  748   WmiPrvSE.exe
+2336  2560  ServerManager.exe
+2344  748   SppExtComObj.Exe
+2356  748   WmiPrvSE.exe
+2536  928   taskhostex.exe
+2616  2604  explorer.exe
+2628  1368  w3wp.exe              x64   0        IIS APPPOOL\Blog  C:\Windows\System32\inetsrv\w3wp.exe
+2996  4088  reverse.exe           x86   0        IIS APPPOOL\Blog  c:\Windows\Temp\reverse.exe
+3092  4088  conhost.exe           x64   0        IIS APPPOOL\Blog  C:\Windows\System32\conhost.exe
+3172  3708  conhost.exe           x64   0        IIS APPPOOL\Blog  C:\Windows\System32\conhost.exe
+3708  2996  cmd.exe               x86   0        IIS APPPOOL\Blog  C:\Windows\SysWOW64\cmd.exe
+3824  676   msdtc.exe
+4088  2628  cmd.exe               x64   0        IIS APPPOOL\Blog  C:\Windows\System32\cmd.exe
