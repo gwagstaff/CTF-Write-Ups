@@ -228,10 +228,10 @@ Overall this box was a good test of skills in the OSCP path. Even with a writeup
 do this without much experience. The questions for the box are a little weird on this one, however keep trying what it SHOULD BE and trust there is a solution. (Remember the stars correspond to the length of the flag in TryHackMe. )
 
 [1]: https://tryhackme.com/room/hackpark
-[2]: ./resources/hackpark_web80.png
-[3]: ./resource/hackpark_aspxlogin80.png
-[4]: ./resources/hackpark_adminabout80
+[2]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/hackpark/resources/hackpark_web80.png
+[3]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/hackpark/resources/hackpark_aspxlogin80.png
+[4]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/hackpark/resources/hackpark_adminabout80.png
 [5]: https://www.exploit-db.com/exploits/46353
-[6]: ./resources/hackpack_filebutton80.png
+[6]: https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/hackpark/resources/hackpark_filebutton80.png
 [7]: ./resources/hackpack_winexploit_suggestions.txt
 [8]: https://www.exploit-db.com/exploits/45072
