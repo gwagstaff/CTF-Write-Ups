@@ -5,7 +5,7 @@
 ## Task 1
 1. Deploy the Vulnerable Machine
   Deploy the machine and ping the IP with `ping [machineIP]` to confirm it is online.
-  2. Scan the machine with nmap, how many ports are open?
+2. Scan the machine with nmap, how many ports are open?
     Run nmap scan with `nmap -sV -sC -Pn -oN nmap_basic.txt [machineIP]` after running for a bit
     we get the results.
     ```
