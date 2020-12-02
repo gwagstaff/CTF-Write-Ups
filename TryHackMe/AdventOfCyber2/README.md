@@ -9,11 +9,11 @@ Welcomeeeee back to the Advent of Cyber! Since the last year hopefully Santa's e
 
 First off, we see there is information about DNS, HTTP, and cookies making you think that this will likely focus on basics and work up through the days as we perform more challenges and get better with our skills. After deploying the target machine and open up the IP in the web browser we see this screen asking us to register.
 
- ![Day1Webpage](2)
+ ![Day1Webpage](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_console.png)
 
 We go ahead and register with some credentials and are greeted with this page:
 
-  ![Day1Console][3]
+  ![Day1Console](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_webpage.png)
 
 Moving into the questions we first have `What is the name of the cookie used for authentication?`.
 Seems pretty simple so far! We can find out what cookies were set in Firefox by pressing F12 then selecting the "Storage" tab.
@@ -64,7 +64,7 @@ Having previous experience definitely helps again here as I know this is a `JSON
 
 After putting value into the correct field in our original cookie, we can refresh the page and see it looks a bit different!
 
- ![SantaConsole][4]
+ ![SantaConsole](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day_santaconsole.png)
 
  After firing up all the controls we get our flag!
 
@@ -72,16 +72,16 @@ After putting value into the correct field in our original cookie, we can refres
 
  See yall on Day 2!
 
-2. Sample
-3. Sample
-4. Sample
-5. Sample
+2. Day 2 Coming!
+3. Day 3 Coming!
+4. Day 4 Coming!
+5. Day 5 Coming!
 
 ## Review
 
 For links:
 [1]: https://tryhackme.com/room/adventofcyber2
-[2]: .\resources\day1_webpage.png
-[3]: .\resources\day1_console.png
-[4]: .\resources\day1_santaconsole.png
+[2]: 
+[3]: 
+[4]: 
 [5]:
