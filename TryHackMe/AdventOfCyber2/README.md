@@ -9,11 +9,11 @@ Welcomeeeee back to the Advent of Cyber! Since the last year hopefully Santa's e
 
 First off, we see there is information about DNS, HTTP, and cookies making you think that this will likely focus on basics and work up through the days as we perform more challenges and get better with our skills. After deploying the target machine and open up the IP in the web browser we see this screen asking us to register.
 
- ![Day1Webpage](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_console.png)
+ ![Day1Webpage](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_webpage.png)
 
 We go ahead and register with some credentials and are greeted with this page:
 
-  ![Day1Console](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_webpage.png)
+  ![Day1Console](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day1_console.png)
 
 Moving into the questions we first have `What is the name of the cookie used for authentication?`.
 Seems pretty simple so far! We can find out what cookies were set in Firefox by pressing F12 then selecting the "Storage" tab.
