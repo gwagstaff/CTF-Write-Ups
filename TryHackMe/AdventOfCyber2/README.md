@@ -74,7 +74,7 @@ After putting value into the correct field in our original cookie, we can refres
  See yall on Day 2!
 </details>
 <details>
-<summary>2. [Day 2] Web Exploitation The Elf Strikes Back!</summary>
+<summary>2. [Day 2] Web Exploitation - The Elf Strikes Back!</summary>
 
 Gooooooddd morninngggg TryHackmeeee! Time for Day 2 of the Advent of Cyber 2!
 
