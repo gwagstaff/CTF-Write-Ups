@@ -23,4 +23,4 @@
 [4]: /BSidesTampa2019/A_Thousand_Words/
 [5]: /TryHackMe/
 [6]: /TryHackMe/Basic_Webapp/
-[7]: /TryHackMe/AdventofCyber2/
+[7]: /TryHackMe/AdventOfCyber2
