@@ -149,7 +149,7 @@ So from previous days we know that the dossier that is given will lead us on the
 
 We go ahead and open up our webpage.
 
- ![SleighTracker](AdventOfCyber2\resources\day3_sleightrackerlogin.png)
+ ![SleighTracker](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day3_sleightrackerlogin.png)
 
 Looking at the question `Use BurpSuite to brute force the login form.  Use the following lists for the default credentials:
 
@@ -164,7 +164,7 @@ So looking at the dossier, I see that it has the exact instructions for how to p
 
 Once performing the brute force we see this page, which scrolling down a bit gives us our flag!
 
-![santamap](AdventOfCyber2\resources\day3_santamap.png)
+![santamap](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day3_santamap.png)
 
 Seeing as this mainly focused on the basics on BurpSuite, we should expect to use it a bit more going forward!
 
