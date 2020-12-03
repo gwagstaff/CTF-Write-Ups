@@ -151,12 +151,14 @@ We go ahead and open up our webpage.
 
  ![SleighTracker](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day3_sleightrackerlogin.png)
 
-Looking at the question `Use BurpSuite to brute force the login form.  Use the following lists for the default credentials:
+Looking at the question `Use BurpSuite to brute force the login form.  Use the following lists for the default credentials:`
 
-Username 	Password
-root 	root
-admin 	password
-user 	12345`
+| Username | Password |
+|----------|----------|
+| root     | root     |
+| admin    | password |
+| user     | 12345    |
+
 
 Hmmm, so pretty straightforward. It seems like today is focusing on learning Burp a bit better because it could be used heavily in the days to come!
 
