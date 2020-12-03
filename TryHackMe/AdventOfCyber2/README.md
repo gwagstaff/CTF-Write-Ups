@@ -89,7 +89,7 @@ Hmmm, so we will keep that in mind but lets first go to the webpage mentioned fo
 
 Well browsing to the webpage we are greeted with this page
 
-![NotSignedIn](..\resources\day2_notsignedin.png)
+![NotSignedIn](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day2_notsignedin.png)
 
 Well it does give us the hint `Please enter your ID as a GET parameter (?id=YOUR_ID_HERE)` which calls back the dossier note:
 
@@ -100,7 +100,7 @@ Well first knowing that `index.php` should serve us the same page, we browse to 
 
 Entering the correct URL we get to this new page!
 
-![protectthefactory](..\resources\day2_protectthefactory.png)
+![protectthefactory](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day2_protectthefactory.png)
 
 Now that we have a upload page lets take a look at the source code to get some clues on what we can do! BY entering `viewsource:` before a URL in FireFox lets you easily see the sourcecode of a website OR you can do the same by right-clicking and clicking `View Source`.
 
@@ -122,7 +122,7 @@ Back on our webpage we go and select our new `shell.jpg` and click the upload bu
 
 Trying first `[machineIP]/images/` but that gives us the same "Enter ID" page. Lets try the URL `machineIP/uploads/` which give us this page with our uploaded `shell.png`!
 
-![uploadsdir](..\resources\day2_uploadsdir.png)
+![uploadsdir](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day2_uploadsdir.png)
 
 Let go ahead and click on our "image" file and check the `nc` session! However there doesn't seem to be a session :/ Hmmmm, we seem to get the error `The image [URL] cannot be displayed because it contains errors.` Well it seems that the server may attempt to execute the file so lets change our extension up some more to see if we cant get our php shell to run.
 
