@@ -142,8 +142,35 @@ Key Takeaways!:
 ALWAYS READ THE DOSSIER -  The dossier is helping us out so make sure to read it fully to understand what is going on in the problem!
 KISS (Keep it simple stupid)! - Try the basic stuff before thinking advanced! This is a learning CTF!
 </details>
+<details>
+ <summary>3. [Day 3] Web Exploitation - Christmas Chaos</summary>
 
-3. Day 3 Coming!
+So from previous days we know that the dossier that is given will lead us on the challenge! In this dossier it explains what default credentials are and how to use BurpSuite to bruteforce a login page.
+
+We go ahead and open up our webpage.
+
+ ![SleighTracker](AdventOfCyber2\resources\day3_sleightrackerlogin.png)
+
+Looking at the question `Use BurpSuite to brute force the login form.  Use the following lists for the default credentials:
+
+Username 	Password
+root 	root
+admin 	password
+user 	12345`
+
+Hmmm, so pretty straightforward. It seems like today is focusing on learning Burp a bit better because it could be used heavily in the days to come!
+
+So looking at the dossier, I see that it has the exact instructions for how to perform this dictionary attack. If you think you need a bit more help with Burp to learn it I recommend running through [BurpSuite Room](https://tryhackme.com/room/rpburpsuite) on TryHackMe to get a bit more practice in!
+
+Once performing the brute force we see this page, which scrolling down a bit gives us our flag!
+
+![santamap](AdventOfCyber2\resources\day3_santamap.png)
+
+Seeing as this mainly focused on the basics on BurpSuite, we should expect to use it a bit more going forward!
+
+See yall on Day 3!
+
+</details>
 4. Day 4 Coming!
 5. Day 5 Coming!
 
