@@ -15,6 +15,7 @@
 
 * [TryHackMe][5]
   * [Basic Pentesting][6]
+  * [Advent of Cyber 2][7]
 
 [1]: https://ctftime.org/team/2524
 [2]: https://twitter.com/naphalsec
@@ -22,3 +23,4 @@
 [4]: /BSidesTampa2019/A_Thousand_Words/
 [5]: /TryHackMe/
 [6]: /TryHackMe/Basic_Webapp/
+[7]: /TryHackMe/AdventofCyber2
