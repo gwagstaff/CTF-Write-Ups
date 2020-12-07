@@ -173,8 +173,95 @@ Seeing as this mainly focused on the basics on BurpSuite, we should expect to us
 See yall on Day 3!
 
 </details>
-4. Day 4 Coming!
-5. Day 5 Coming!
+<details>
+<summary>4. [Day 4] Web Exploitation - Santa's watching </summary>
+
+Day 4! Getting into the Dossier, we see that we get an intro to fuzzing and enumeration using Gobuster and WFuzz.
+
+Here are the main examples I see (and that I have used in the past).
+
+Gobuster:
+`gobuster dir -u http://example.com -w /usr/share/wordlist/sample.txt`
+
+with the options to add `-x php,html,txt` to search for those files.
+Option information:
+dir => search for directories
+-u => URL in http/https format
+-w => path to wordlist
+-x => extension to add onto wordlist
+
+
+WFuzz:
+`wfuzz -c -z file,mywordlist.txt -d “id=FUZZ” -u http://example.com/query.php`
+
+Option information:
+-c => colored format
+-z file,mywordlist.txt => What and How to replace "FUZZ" [type],[file] (file type, filename)
+-d "parameter=FUZZ" => What to FUZZ! FUZZ gets replaced by each string within wordlist.txt
+-u http://example.com/query.php => What URL the parameter is added to
+
+Given the above we can craft the first wfuzz query for the answer!
+
+`[REDACTED]`
+
+Perfect!
+
+Now lets go ahead and fire up GoBuster to find our API directory! Using the command
+
+`gobuster dir -u http://[machineIP]/api -w /usr/share/wordlists/dirb/big.txt -x php`
+
+to look for the file under the api directory! We get a single result for 200, which indicates that's our endpoint to bruteforce!
+
+Lets go ahead and fire up wfuzz using the example query above to try and bruteforce this API using our provided wordlist!
+
+First though, lets see what a "bad" request looks like so we know what a successful attempt looks like!
+
+`wfuzz -c -z range,1-10 -u [URLFound/apiendpoint/file]`
+
+Which should give you similar output to
+```
+********************************************************
+* Wfuzz 2.2.9 - The Web Fuzzer                         *
+********************************************************
+
+Target: [URLFound/apiendpoint/file]
+Total requests: 10
+
+==================================================================
+ID	Response   Lines      Word         Chars          Payload    
+==================================================================
+
+000001:  C=200      0 L	       0 W	      0 Ch	  "1"
+000002:  C=200      0 L	       0 W	      0 Ch	  "2"
+000003:  C=200      0 L	       0 W	      0 Ch	  "3"
+000004:  C=200      0 L	       0 W	      0 Ch	  "4"
+000005:  C=200      0 L	       0 W	      0 Ch	  "5"
+000006:  C=200      0 L	       0 W	      0 Ch	  "6"
+000007:  C=200      0 L	       0 W	      0 Ch	  "7"
+000009:  C=200      0 L	       0 W	      0 Ch	  "9"
+000008:  C=200      0 L	       0 W	      0 Ch	  "8"
+000010:  C=200      0 L	       0 W	      0 Ch	  "10"
+
+Total time: 0.079469
+Processed Requests: 10
+Filtered Requests: 0
+Requests/sec.: 125.8337
+```
+So we see that when there are no results the page is empty, so lets filter out empty results with the command line argument `--hl 0`
+
+Once setting up the wfuzz query (HINT: VERY CLOSE to answer 2) we add `--hl 0` to the end which will only give us the valid page!
+
+Once that finishes, go ahead and manually go to that page on your browser and grab the flag!
+
+</details>
+
+<details>
+<summary>5.  [Day 5] Web Exploitation - Someone stole Santa's gift list! </summary>
+
+
+
+
+</details>
 
 ## Review
 
