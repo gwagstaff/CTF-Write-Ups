@@ -258,8 +258,53 @@ Once that finishes, go ahead and manually go to that page on your browser and gr
 <details>
 <summary>5.  [Day 5] Web Exploitation - Someone stole Santa's gift list! </summary>
 
+Looking into Day 5 we can see there is a bit here and definitely gets complicated if this is the first time you have ever even looked at SQL! So lets break down the important things here:
+
+SQL: This is a database programming language which lets you interact with databases to insert, change, delete, view and so much more! The [site provided](https://www.codecademy.com/articles/sql-commands) is a great resource for absolute beginners to learn the basic however these basic commands and definitions should be fine for now.
+
+Terms:
+table =  basic "database"; hold data in rows and columns
+statement = actions you perform on the database (any action you do not just the modifications)
 
 
+SELECT: how to select DATA from table
+FROM: select WHICH table you want to pull data from
+WHERE: Specify WHAT data you want from table
+UNION: Combine two (or more) different SELECT results (think Venn Diagram and each circle is a SELECT statement)
+
+Additional, it gives us `1=1 == True` (which means the inverse `1=0 == False`) which gives us a way to put true or false within our SQL statements.
+
+SQLi Attacks:
+
+We know from day 2 & 4 you can abuse PHP parameters to bruteforce and access things you arent suppose to be able to access. Well SQLi attacks go a step beyond and attempts to abuse the CODE behind the parameters we bruteforced before. The dossier given explains it better than I ever could in short write-up so I recommend reading that and referencing the [THM Room: SQLi Basics] (https://tryhackme.com/room/sqlibasics) to get more practice! If you are still confused hop on over to [JHDiscord](2) or [THM Discord](3) to get additional help!
+
+Getting into the questions we can see we first have to access `[machineIP]:8000`and see that we have a basic "Santa's Official Forum"  as pictured here
+
+![santaforum](./day5_santaforum.png)
+
+So first we have the question:
+`Without using directory brute forcing, what's Santa's secret login panel?`
+
+Alright, so no gobuster or dirbuster here just some good old fashion guessing! We know from the THM flag length hint that it will be 10 characters long so lets try some strings like `santa` + `login` or `santa` + `forum` that could fit the format. After guessing a bit we are able to get the correct login! (Hint: the words are in the question).
+
+Okay cool we have a login page so now what?
+
+`Visit Santa's secret login panel and bypass the login using SQLi`
+
+So using some of the basic SQLi attacks given we are able to bypass the `password` field and get into Santa's database!
+
+![santasdatabase](./day5_santadatabase.png)
+
+Hmmmm, so we have a search bar and just below that a table that list the gift and child with only `null` as data. So going back to our dossier we know that SQL Union attacks are one of the fastest ways to enumerate through a database! Trying the basic query that is given in the dossier `' ORDER BY 1--` gives us all of our table listing out the Gift and Child!
+
+![santadbuniondump](./day5_dbuniondump.png)
+
+Hmmm, so now that we have the database we need to get the flag and the admin's password. The one problem with SQLi is that you are kinda flying blind unless you know exactly how the underlying program is processing the SQL statement you are attemping to send in. Luckily we have a tool that can make this easy for us!
+
+
+SQLMap is a great tool that will you to dump databases and other great information automatically with pretty little information. The dossier gives great instructions on how to run SQLMap and Burp to go ahead and start running! (Remember the dossier contains information about which database and )
+
+Using the command `sqlmap -r Desktop/request.sqli --tamper=space2comment --dbms sqlite --dump-all` we are able to dump the Flag and Admin password!
 
 </details>
 
@@ -267,7 +312,7 @@ Once that finishes, go ahead and manually go to that page on your browser and gr
 
 For links:
 [1]: https://tryhackme.com/room/adventofcyber2
-[2]:
-[3]:
+[2]: http://johnhammond.org:8080/discord
+[3]: discord.gg/tryhackme
 [4]:
 [5]:
