@@ -280,7 +280,7 @@ We know from day 2 & 4 you can abuse PHP parameters to bruteforce and access thi
 
 Getting into the questions we can see we first have to access `[machineIP]:8000`and see that we have a basic "Santa's Official Forum"  as pictured here
 
-![santaforum](./day5_santaforum.png)
+![santaforum](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day5_santaforum.png)
 
 So first we have the question:
 `Without using directory brute forcing, what's Santa's secret login panel?`
@@ -293,11 +293,11 @@ Okay cool we have a login page so now what?
 
 So using some of the basic SQLi attacks given we are able to bypass the `password` field and get into Santa's database!
 
-![santasdatabase](./day5_santadatabase.png)
+![santasdatabase](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day5_santadatabase.png)
 
 Hmmmm, so we have a search bar and just below that a table that list the gift and child with only `null` as data. So going back to our dossier we know that SQL Union attacks are one of the fastest ways to enumerate through a database! Trying the basic query that is given in the dossier `' ORDER BY 1--` gives us all of our table listing out the Gift and Child!
 
-![santadbuniondump](./day5_dbuniondump.png)
+![santadbuniondump](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day5_dbuniondump.png)
 
 Hmmm, so now that we have the database we need to get the flag and the admin's password. The one problem with SQLi is that you are kinda flying blind unless you know exactly how the underlying program is processing the SQL statement you are attemping to send in. Luckily we have a tool that can make this easy for us!
 
@@ -313,11 +313,11 @@ Using the command `sqlmap -r Desktop/request.sqli --tamper=space2comment --dbms 
 
 Accessing the site `[machineIP]:5000` we see we get this page!
 
-![santamakeawish](.\day6_santamakeawish.png)
+![santamakeawish](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day6_santamakeawish.png)
 
 So knowing that XSS is an option when we have user interactive components we can start thinking of the ways to try and exploit this `search` field and `Enter your wish here:` field. First lets try the basis XSS `<img src='LINK' onmouseover="alert('xss')">` to test if XSS is possible within the Wish field. Luckily it works!
 
-![sanatawishxss](./day6_wishxss.png)
+![sanatawishxss](https://raw.githubusercontent.com/gwagstaff/CTF-Write-Ups/master/TryHackMe/AdventOfCyber2/resources/day6_wishxss.png)
 
 Looking at the second question, `What vulnerability type was used to exploit the application?`we know that there are two main types talked about in the dossier, Reflected XSS and Stored XSS. Given that we are able to place something on the server that stays around in the "Wishlist" make your best guess!
 
