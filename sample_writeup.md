@@ -17,3 +17,7 @@ For links
 [3]:
 [4]:
 [5]:
+
+<details>
+<summary> Collapsible Section </summary>
+</details>
