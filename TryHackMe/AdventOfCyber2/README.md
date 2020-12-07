@@ -308,6 +308,30 @@ Using the command `sqlmap -r Desktop/request.sqli --tamper=space2comment --dbms 
 
 </details>
 
+<details>
+<summary>6. [Day 6] Web Exploitation Be careful with what you wish on a Christmas night </summary>
+
+Accessing the site `[machineIP]:5000` we see we get this page!
+
+![santamakeawish](.\day6_santamakeawish.png)
+
+So knowing that XSS is an option when we have user interactive components we can start thinking of the ways to try and exploit this `search` field and `Enter your wish here:` field. First lets try the basis XSS `<img src='LINK' onmouseover="alert('xss')">` to test if XSS is possible within the Wish field. Luckily it works!
+
+![sanatawishxss](./day6_wishxss.png)
+
+Looking at the second question, `What vulnerability type was used to exploit the application?`we know that there are two main types talked about in the dossier, Reflected XSS and Stored XSS. Given that we are able to place something on the server that stays around in the "Wishlist" make your best guess!
+
+So now we know about the stored XSS, what parameter do we need to exploit to use reflected XSS? Looking at the search bar, it looks like there is a query we can abuse! `http://[machineIP]:5000/?q=>script>alert(1)</script>` gives us our reflected XSS!
+
+Okay so now we have XSS how can we exploit that? Well luckily we have a tool called `OWASP ZAP` that will go ahead and try a bunch of different exploit, similar to the way SQLMap does.
+
+Go ahead and open up `OWASP ZAP` and click the `Automated Scan` button and enter the `http://[machineIP]:5000` into the `URL to attack`
+field. Click `Attack` and watch it go! After a bit we will get some results that help us answer our last question (XSS Alerts == Cross Site Scripting attacks ONLY)!
+
+Looking at the last question `Explore the XSS alerts that ZAP has identified, are you able to make an alert appear on the "Make a wish" website?` looks like we already got there! Feel free to play around and see what types of XSS are possible with resources such as [XSS Payload List by Payload Box](https://github.com/payloadbox/xss-payload-list) & [Payload All The Things -  XSS Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection). 
+
+</details>
+
 ## Review
 
 For links:
